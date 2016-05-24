@@ -21,18 +21,38 @@ export class Piece {
 */
 @Component({
     template: `<h2>Add Tune component</h2>
-                 <ul>
-                 <template ngFor #tuneLine [ngForOf]="tune" >
-                    <li>
-                      <template ngFor #pcs [ngForOf]="tuneLine" >
-                        <span>
-                          {{pcs.text}}
-                        </span>
+                 
+                 <table>
+                 <template ngFor #tuneLine [ngForOf]="tune" #lineNum=index>
+                    <tr>
+                      <template ngFor #pcs [ngForOf]="tuneLine" #isLast=last #noteNum=index>
+                        <td class = "{{pcs.note}}">
+                          {{pcs.note}}
+                        </td>
+                        <td *ngIf="isLast" (click)="addNote(lineNum,noteNum)"> + </td>
                       </template>
-                    </li>
+                        
+                      </tr>
+                      <tr>
+                      <template ngFor #pcs [ngForOf]="tuneLine" >
+                        <td>
+                          {{pcs.text}}
+                        </td>
+                      </template>
+                    </tr>
                  </template>
-                 </ul>
-                 `
+                 </table>
+                 `,
+    styles: [`td { padding: 5; height : 40px;}
+            .do {background: red}
+            .re {background: #ff9900}
+            .mi {background: yellow}
+            .fa {background: green}
+            .sol {background: aqua}
+            .la {background: blue}
+            .si {background: darkviolet}
+            .do2 {background: red}
+    `]
 })
 
 
@@ -41,5 +61,9 @@ export class Piece {
 //}
 
 export class AddTuneComponent { 
-  tune: Piece[][] = [[{text:'ма',note:'Соль'},{text:'лень',note:'Ми'},{text:'кой',note:'Ми'},{text:'ё',note:'Соль'},{text:'лоч',note:'Ми'},{text:'ке',note:'Ми'}],[{text:'хо',note:'Соль'},{text:'лод',note:'Фа'},{text:'но',note:'Ми'},{text:'зи',note:'Ре'},{text:'мой',note:'До'}]];
+  tune: Piece[][] = [[{text:'ма',note:'do'},{text:'лень',note:'mi'},{text:'кой',note:'mi'},{text:'ё',note:'sol'},{text:'лоч',note:'mi'},{text:'ке',note:'mi'}],[{text:'хо',note:'sol'},{text:'лод',note:'fa'},{text:'но',note:'mi'},{text:'зи',note:'re'},{text:'мой',note:'do'}]];
+
+  addNote(lineNum,noteLine) {
+    this.tune[lineNum].push({text:'мф',note:'do'});
+  }
 };
