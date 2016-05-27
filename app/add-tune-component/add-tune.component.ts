@@ -79,9 +79,22 @@ export class AddTuneComponent {
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
-    td { padding: 5;  width : 80px; height : 40px;}
+    table{
+    border: 1px solid black;
+    table-layout: fixed;
+    width: 320px;
+    }
+    input{
+    color: black;
+    }
+    .tooltip-inner {
+    max-width: 350px;
+    /* If max-width does not work, try using width instead */
+    /*width: 350px; */
+    }
+    td { padding: 5;  width : 40px; height : 40px;}
             .do {background: red}
-            .re {background: #ff9900}
+            .re {background: #ff9900; border: 5px solid white}
             .mi {background: yellow}
             .fa {background: green}
             .sol {background: aqua}
@@ -102,19 +115,26 @@ export class AddTuneComponent {
 $(document).ready(function(){
     $('.btn').tooltip({trigger: "manual", title: `
     <table>
-      <tr>
+      <tr id="noteTable">
         <td class = "do"> do </td>
-        <td class = "re"> do </td>
-        <td class = "mi"> do </td>
-        <td class = "fa"> do </td>
-        <td class = "sol"> do </td>
-        <td class = "la"> do </td>
-        <td class = "si"> do </td>
+        <td class = "re"> re </td>
+        <td class = "mi"> mi </td>
+        <td class = "fa"> fa </td>
+        <td class = "sol"> sol </td>
+        <td class = "la"> la </td>
+        <td class = "si"> si </td>
         <td class = "do2"> do </td>
+      </tr>
       <tr>
+        <td align = "center"><input id="textToAdd" name = "noteToAdd"></td>
+      </tr>
     </table>
                          `, html: true, placement: "bottom"});
-   $('.btn').click(function(){$('.btn').tooltip("show");});
+   $('.btn').click(function(){$('.btn').tooltip("toggle");});
+   $('#noteTable').children().click(function(){$('.btn').tooltip("toggle");});
+   $('#noteTable').children().css( "background-color", "red" );
+
+//css( "background-color", "red" )
 });
 </script>
 
